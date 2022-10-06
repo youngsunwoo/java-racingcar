@@ -13,7 +13,7 @@ public class StringAddCalculator {
         return getSumValue(split(input));
     }
 
-    public static String[] split(String text) {
+    private static String[] split(String text) {
         String delimiter = ":|,";
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
 
@@ -25,10 +25,7 @@ public class StringAddCalculator {
     }
 
     private static boolean isNullOrEmpty(String text) {
-        if (text == null) {
-            return true;
-        }
-        if (text.isEmpty()) {
+        if (text == null || text.isEmpty()) {
             return true;
         }
         return false;
@@ -43,7 +40,7 @@ public class StringAddCalculator {
     }
 
     private static int validPositiveNumber(int number) {
-        if(number < 0) {
+        if (number < 0) {
             throw new RuntimeException("Nagative Number is not allowed");
         }
         return number;
@@ -51,8 +48,7 @@ public class StringAddCalculator {
 
     private static int getSumValue(String[] numbers) {
         return Arrays.stream(numbers)
-                .map(
-                        s -> convertPositiveNumber(isNullOrEmpty(s) ? "0" : s)
-                ).mapToInt(i -> i).sum();
+                .map(text -> convertPositiveNumber(isNullOrEmpty(text) ? "0" : text))
+                .mapToInt(number -> number).sum();
     }
 }

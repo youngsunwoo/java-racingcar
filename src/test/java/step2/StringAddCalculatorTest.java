@@ -56,4 +56,16 @@ public class StringAddCalculatorTest {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1"))
                 .isInstanceOf(RuntimeException.class);
     }
+
+    @Test
+    public void splitAndSum_숫자아닌문자() throws Exception {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("a"))
+                .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    public void splitAndSum__custom_구분자_and_문자() throws Exception {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("//;\n1;a;b"))
+                .isInstanceOf(RuntimeException.class);
+    }
 }
